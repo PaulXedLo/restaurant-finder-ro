@@ -1,5 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
-import "./app/lib/env";
+import "./lib/env";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -13,5 +13,5 @@ export default defineNuxtConfig({
     dataValue: "theme",
   },
 
-  modules: ["@nuxt/icon", "@nuxtjs/color-mode"],
+  modules: ["@nuxt/icon", "@nuxtjs/color-mode", "@nuxt/image"],
 });
