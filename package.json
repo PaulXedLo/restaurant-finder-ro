@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@maptiler/sdk": "^3.11.1",
     "@neondatabase/serverless": "^1.0.2",
     "@nuxt/icon": "^2.2.1",
     "@nuxt/image": "^2.0.0",
@@ -18,6 +19,7 @@
     "better-auth": "^1.5.5",
     "dotenv": "^17.3.1",
     "drizzle-orm": "^1.0.0-beta.18-7eb39f0",
+    "maplibre-gl": "^5.21.0",
     "nuxt": "^4.4.2",
     "tailwindcss": "^4.2.2",
     "vue": "^3.5.30",
