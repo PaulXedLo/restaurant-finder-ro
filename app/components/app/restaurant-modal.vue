@@ -43,8 +43,11 @@ const { selectedRestaurant, closeModal } = useMap();
         >
           {{ selectedRestaurant.tags.amenity.replace("_", " ") }}
         </div>
-        <div v-if="selectedRestaurant.tags?.['addr:street']">
-          <Icon name="tabler:pin" size="22" />
+        <div
+          v-if="selectedRestaurant.tags?.['addr:street']"
+          class="flex items-center gap-2"
+        >
+          <Icon name="tabler:pin" size="20" />
           <span>{{ selectedRestaurant.tags["addr:street"] }}</span>
         </div>
       </div>

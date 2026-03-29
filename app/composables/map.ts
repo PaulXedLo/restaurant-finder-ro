@@ -49,35 +49,20 @@ export const useMap = () => {
   // fetch restaurants in view
   const fetchRestaurantsInView = async () => {
     if (!mapInstance.value) return;
-    // getting the current bounds
+    //Get the current map boundaries
     const bounds = mapInstance.value.getBounds();
-    const bbox = `${bounds.getSouth()}, ${bounds.getWest()}, ${bounds.getNorth()}, ${bounds.getEast()}`;
-    // overpass query language
-    let queryNodes = "";
-    if (selectedTypeOfRestaurant.value === "all") {
-      queryNodes = `
-        node["amenity"="restaurant"](${bbox});
-        node["amenity"="fast_food"](${bbox});
-        node["amenity"="cafe"](${bbox});
-      `;
-    } else {
-      queryNodes = `
-        node["amenity"="restaurant"]["cuisine"~"${selectedTypeOfRestaurant.value}"](${bbox});
-        node["amenity"="fast_food"]["cuisine"~"${selectedTypeOfRestaurant.value}"](${bbox});
-      `;
-    }
-    const query = `[out:json][timeout:10];(${queryNodes});out body;`;
+    const bboxString = `${bounds.getSouth()},${bounds.getWest()},${bounds.getNorth()},${bounds.getEast()}`;
     try {
       isLoading.value = true;
-      const response = await fetch("https://overpass-api.de/api/interpreter", {
-        method: "POST",
-        body: query,
+      const data = await $fetch("/api/restaurants", {
+        query: {
+          bbox: bboxString,
+          type: selectedTypeOfRestaurant.value,
+        },
       });
-      const data = await response.json();
-      console.log("RAW OVERPASS DATA:", data.elements);
-      renderMarkers(data.elements);
+      renderMarkers(data as any[]);
     } catch (error) {
-      console.error("Failed to fetch restaurants:", error);
+      console.error("Backend fetch failed:", error);
     } finally {
       isLoading.value = false;
     }
